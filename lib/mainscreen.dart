@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:real_dating/pages/home_page.dart';
 
 class DisplayImage extends StatefulWidget {
@@ -16,7 +15,8 @@ class _DisplayImageState extends State<DisplayImage> {
   PageController? pageController;
 
   @override
-  void initSate() {
+  void initState() {
+    // Corrected typo here
     super.initState();
     pageController = PageController(initialPage: _currentIndex!);
   }
@@ -42,39 +42,28 @@ class _DisplayImageState extends State<DisplayImage> {
             padding: const EdgeInsets.all(20.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(40.0),
-              child: BottomNavyBar(
-                // containerHeight: 45,
+              child: GNav(
+                backgroundColor: Colors.white,
                 selectedIndex: _currentIndex!,
-                showElevation: false,
-                itemCornerRadius: 24,
+                activeColor: Colors.red,
                 curve: Curves.easeIn,
-                onItemSelected: navigationTapped,
-                items: <BottomNavyBarItem>[
-                  BottomNavyBarItem(
-                    icon: const Icon(Iconsax.home),
-                    title: const Text('Home'),
-                    activeColor: Colors.red,
-                    textAlign: TextAlign.center,
+                onTabChange: navigationTapped,
+                tabs: const [
+                  GButton(
+                    icon: Iconsax.home,
+                    text: '  Home',
                   ),
-                  BottomNavyBarItem(
-                    icon: const Icon(Iconsax.search_normal),
-                    title: const Text('Search'),
-                    activeColor: Colors.purpleAccent,
-                    textAlign: TextAlign.center,
+                  GButton(
+                    icon: Iconsax.search_normal,
+                    text: '  Search',
                   ),
-                  BottomNavyBarItem(
-                    icon: const Icon(Iconsax.message),
-                    title: const Text(
-                        'Message'
-                    ),
-                    activeColor: Colors.pink,
-                    textAlign: TextAlign.center,
+                  GButton(
+                    icon: Iconsax.message,
+                    text: '  Messages',
                   ),
-                  BottomNavyBarItem(
-                    icon: const Icon(Iconsax.settings),
-                    title: const Text('Settings'),
-                    activeColor: Colors.blue,
-                    textAlign: TextAlign.center,
+                  GButton(
+                    icon: Iconsax.setting,
+                    text: '  Settings',
                   ),
                 ],
               ),
@@ -84,7 +73,6 @@ class _DisplayImageState extends State<DisplayImage> {
       ),
     );
   }
-
 
   void navigationTapped(int page) {
     pageController!.jumpToPage(page);
